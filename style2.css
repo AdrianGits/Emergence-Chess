@@ -1,0 +1,130 @@
+@import url('https://fonts.cdnfonts.com/css/archia');
+
+h1, * {
+    text-decoration: bold;
+    text-align: center;
+    font-family: 'Archia', 'sans-serif';
+}
+
+h1 {
+  font-size: 1.5vw;
+}
+
+/* table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.7vw;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    user-select: none;
+  } */
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+    font-size: 0.7vw;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid black;
+    user-select: none;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  .arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+ 
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+
+  .new-player-form {
+    max-width: 10vw;
+    margin: 0 auto;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.input-row label {
+    margin-bottom: 5px;
+}
+
+.input-row input {
+    flex: 1;
+    flex-basis: 20%;
+    text-align: center;
+    font-size: 0.75vw;
+}
+
+.input-row input[type="number"]::-webkit-inner-spin-button,
+.input-row input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-row input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.button-row {
+    margin-top: 10px;
+    margin-bottom: 1vh;
+}
+
+#add-new-player-btn {
+  padding: 0.5vh 0.5vh;
+  background-color: #21B573; /* Change to desired button background color */
+  color: #fff; /* Change to desired button text color */
+  border: none;
+  cursor: pointer;
+  font-size: 0.6vw; /* Change to desired button font size */
+  font-weight: bold; /* Change to desired button font weight */
+  transition: background-color 0.3s ease; /* Add smooth transition effect on hover */
+  margin-top: 0.4vw;
+  margin-bottom: 1.5vw;
+}
+
+#add-new-player-btn:hover {
+  background-color: #197e50; /* Change to desired button background color on hover */
+}
+
+.nameLabel, .eloLabel {
+  font-size: 0.8vw;
+  text-decoration: underline;
+}
+
+.win-btn, .lose-btn, .delete-btn {
+  font-size: 0.5vw;
+}
