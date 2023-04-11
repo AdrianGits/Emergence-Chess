@@ -41,10 +41,9 @@
                 <th>W/L Ratio</th>
                 <th>Actions</th>
             </tr>
-            <tr id="empty-state-row" style="display:none;">
-                <td colspan="7" class="empty-state">No data available. Add a player to get started!</td>
-            </tbody>
         </table>
+        <tr id="empty-state-row" style="display:none;">
+        </tbody>
     </div>
 
     Adrian development buttons
@@ -77,14 +76,15 @@ function onSeedDataButtonClick() {
 
 //Code for displaying empty table message
 window.addEventListener('DOMContentLoaded', function () {
-            const table = document.getElementById('leaderboard-table');
-            const emptyStateRow = document.getElementById('empty-state-row');
+    const table = document.getElementById('leaderboard-table');
+    const emptyStateMessage = document.createElement('p');
+    emptyStateMessage.className = 'empty-state';
+    emptyStateMessage.textContent = 'No data available. Add a player to get started!';
 
-            if (table.rows.length <= 2) {
-                emptyStateRow.style.display = 'table-row';
-            }
-        });
-
+    if (table.rows.length <= 1) {
+        document.querySelector('.leaderboard-div').appendChild(emptyStateMessage);
+    }
+});
 </script>
 
 <button id='clear-btn'>Clear</button>
