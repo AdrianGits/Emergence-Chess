@@ -41,15 +41,12 @@
                 <th>W/L Ratio</th>
                 <th>Actions</th>
             </tr>
-            <tr id="empty-state-row" style="display:none;">
-                <td colspan="7" class="empty-state">No data available. Add a player to get started!</td>
-            </tr>
+       
             </tbody>
         </table>
     </div>
 
- 
-Adrian development buttons
+    Adrian development buttons
 
     <button id="seed-data-btn">Seed Data</button>
 
@@ -76,18 +73,6 @@ function onSeedDataButtonClick() {
     seedLocalStorageData();
     location.reload();
 }
-
-
-
-        // Check if table has any rows, if not, show empty state row
-        window.addEventListener('DOMContentLoaded', function () {
-            const table = document.getElementById('leaderboard-table');
-            const emptyStateRow = document.getElementById('empty-state-row');
-
-            if (table.rows.length <= 2) { // Consider the header row, so if there's only one row, it's empty
-                emptyStateRow.style.display = 'table-row';
-            }
-        });
 
 </script>
 
