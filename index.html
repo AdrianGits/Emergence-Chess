@@ -57,10 +57,10 @@ document.getElementById('seed-data-btn').addEventListener('click', onSeedDataBut
 function seedLocalStorageData() {
     // Create an array of player objects with initial win/loss data
     const players = [
-        { name: 'Nikil Deo', elo: 1200, wins: 1, losses: 0},
-        { name: 'Adrian Chan', elo: 1000, wins: 4, losses: 3},
-        { name: 'Aaron Calbert', elo: 800, wins: 1, losses: 2},
-        { name: 'Chali Tillikaratne', elo: 1100, wins: 2, losses: 1}
+        { name: 'Nikil Deo', elo: 1200, wins: 1, losses: 0, wlRatio: 0},
+        { name: 'Adrian Chan', elo: 1000, wins: 4, losses: 3, wlRatio: 0},
+        { name: 'Aaron Calbert', elo: 800, wins: 1, losses: 2, wlRatio: 0},
+        { name: 'Chali Tillikaratne', elo: 1100, wins: 2, losses: 1, wlRatio: 0}
     ];
 
     // Store the player data in localStorage
@@ -73,18 +73,6 @@ function onSeedDataButtonClick() {
     seedLocalStorageData();
     location.reload();
 }
-
-//Code for displaying empty table message
-window.addEventListener('DOMContentLoaded', function () {
-    const table = document.getElementById('leaderboard-table');
-    const emptyStateMessage = document.createElement('p');
-    emptyStateMessage.className = 'empty-state';
-    emptyStateMessage.textContent = 'No data available. Add a player to get started!';
-
-    if (table.rows.length <= 1) {
-        document.querySelector('.leaderboard-div').appendChild(emptyStateMessage);
-    }
-});
 </script>
 
 <button id='clear-btn'>Clear</button>

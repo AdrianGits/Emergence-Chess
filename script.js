@@ -71,7 +71,8 @@ function onAddPlayer(e) {
       name: nameInput,
       elo: eloInput,
       wins: 0,
-      losses: 0
+      losses: 0,
+      wlRatio: 0
     };
     const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : [];
     players.push(player);
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <td>${player.elo}</td>
           <td>${player.wins}</td>
           <td>${player.losses}</td>
-          <td></td>
+          <td>${player.wlRatio}</td>
           <td>
             <button class="win-btn">Add Win</button>
             <button class="lose-btn">Add Loss</button>
@@ -106,11 +107,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  
-
-function onAddWin(e) {
+  function onAddWin(e) {
     if (!e.target.classList.contains("win-btn")) {
-        return;
+      return;
     }
     const winBtn = e.target;
     const row = winBtn.closest("tr");
@@ -118,31 +117,89 @@ function onAddWin(e) {
     let wins = parseInt(winsCell.textContent);
     wins++;
     winsCell.textContent = wins;
-
+  
     const lossesCell = row.querySelector("td:nth-child(5)");
     let losses = parseInt(lossesCell.textContent);
-
+  
     const wlRatioCell = row.querySelector("td:nth-child(6)");
-    wlRatioCell.textContent = calculateWLRatio(wins, losses);
-}
-
-function onAddLose(e) {
+    const playerName = row.querySelector("td:nth-child(2)").textContent;
+    const players = JSON.parse(localStorage.getItem('players')) || [];
+    const playerIndex = players.findIndex(player => player.name === playerName);
+    
+    if (playerIndex !== -1) {
+      players[playerIndex].wins = wins;
+      players[playerIndex].wlRatio = calculateWLRatio(wins, losses);
+      localStorage.setItem('players', JSON.stringify(players));
+      wlRatioCell.textContent = players[playerIndex].wlRatio;
+    }
+  }
+  
+  function onAddLose(e) {
     if (!e.target.classList.contains("lose-btn")) {
-        return;
+      return;
     }
     const loseBtn = e.target;
     const row = loseBtn.closest("tr");
-    const loseCell = row.querySelector("td:nth-child(5)");
-    let lose = parseInt(loseCell.textContent);
-    lose++;
-    loseCell.textContent = lose;
-
+    const lossesCell = row.querySelector("td:nth-child(5)");
+    let losses = parseInt(lossesCell.textContent);
+    losses++;
+    lossesCell.textContent = losses;
+  
     const winsCell = row.querySelector("td:nth-child(4)");
     let wins = parseInt(winsCell.textContent);
-
+  
     const wlRatioCell = row.querySelector("td:nth-child(6)");
-    wlRatioCell.textContent = calculateWLRatio(wins, lose);
-}
+    const playerName = row.querySelector("td:nth-child(2)").textContent;
+    const players = JSON.parse(localStorage.getItem('players')) || [];
+    const playerIndex = players.findIndex(player => player.name === playerName);
+    
+    if (playerIndex !== -1) {
+      players[playerIndex].losses = losses;
+      players[playerIndex].wlRatio = calculateWLRatio(wins, losses);
+      localStorage.setItem('players', JSON.stringify(players));
+      wlRatioCell.textContent = players[playerIndex].wlRatio;
+    }
+  }
+  
+  
+  
+  
+
+// function onAddWin(e) {
+//     if (!e.target.classList.contains("win-btn")) {
+//         return;
+//     }
+//     const winBtn = e.target;
+//     const row = winBtn.closest("tr");
+//     const winsCell = row.querySelector("td:nth-child(4)");
+//     let wins = parseInt(winsCell.textContent);
+//     wins++;
+//     winsCell.textContent = wins;
+
+//     const lossesCell = row.querySelector("td:nth-child(5)");
+//     let losses = parseInt(lossesCell.textContent);
+
+//     const wlRatioCell = row.querySelector("td:nth-child(6)");
+//     wlRatioCell.textContent = calculateWLRatio(wins, losses);
+// }
+
+// function onAddLose(e) {
+//     if (!e.target.classList.contains("lose-btn")) {
+//         return;
+//     }
+//     const loseBtn = e.target;
+//     const row = loseBtn.closest("tr");
+//     const loseCell = row.querySelector("td:nth-child(5)");
+//     let lose = parseInt(loseCell.textContent);
+//     lose++;
+//     loseCell.textContent = lose;
+
+//     const winsCell = row.querySelector("td:nth-child(4)");
+//     let wins = parseInt(winsCell.textContent);
+
+//     const wlRatioCell = row.querySelector("td:nth-child(6)");
+//     wlRatioCell.textContent = calculateWLRatio(wins, lose);
+// }
 
 function calculateWLRatio(wins, losses) {
     if (losses === 0) {
@@ -206,6 +263,20 @@ function onClearLocalStorage() {
     localStorage.clear();
     location.reload();
 }
+
+//Code for displaying empty table message
+window.addEventListener('DOMContentLoaded', function () {
+  const table = document.getElementById('leaderboard-table');
+  const emptyStateMessage = document.createElement('p');
+  emptyStateMessage.className = 'empty-state';
+  emptyStateMessage.textContent = 'No data available. Add a player to get started!';
+
+  if (table.rows.length <= 1) {
+      document.querySelector('.leaderboard-div').appendChild(emptyStateMessage);
+  }
+});
+
+
 
 
 /*
