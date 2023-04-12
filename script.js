@@ -163,43 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   
   
-  
 
-// function onAddWin(e) {
-//     if (!e.target.classList.contains("win-btn")) {
-//         return;
-//     }
-//     const winBtn = e.target;
-//     const row = winBtn.closest("tr");
-//     const winsCell = row.querySelector("td:nth-child(4)");
-//     let wins = parseInt(winsCell.textContent);
-//     wins++;
-//     winsCell.textContent = wins;
-
-//     const lossesCell = row.querySelector("td:nth-child(5)");
-//     let losses = parseInt(lossesCell.textContent);
-
-//     const wlRatioCell = row.querySelector("td:nth-child(6)");
-//     wlRatioCell.textContent = calculateWLRatio(wins, losses);
-// }
-
-// function onAddLose(e) {
-//     if (!e.target.classList.contains("lose-btn")) {
-//         return;
-//     }
-//     const loseBtn = e.target;
-//     const row = loseBtn.closest("tr");
-//     const loseCell = row.querySelector("td:nth-child(5)");
-//     let lose = parseInt(loseCell.textContent);
-//     lose++;
-//     loseCell.textContent = lose;
-
-//     const winsCell = row.querySelector("td:nth-child(4)");
-//     let wins = parseInt(winsCell.textContent);
-
-//     const wlRatioCell = row.querySelector("td:nth-child(6)");
-//     wlRatioCell.textContent = calculateWLRatio(wins, lose);
-// }
 
 function calculateWLRatio(wins, losses) {
     if (losses === 0) {
@@ -276,49 +240,3 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-
-
-
-/*
-// Old onAddPlayer function (pre-localstorage)
-// function onAddPlayer(e) {
-//         e.preventDefault();
-//         const nameInput = document.getElementById('name').value;
-//         const eloInput = document.getElementById('elo').value;
-//         const tbodyEl = document.querySelector('#leaderboard-table tbody');
-//         const newRow = `
-//           <tr>
-//             <td></td>
-//             <td>${nameInput}</td>
-//             <td>${eloInput}</td>
-//             <td>0</td>
-//             <td>0</td>
-//             <td></td>
-//             <td>
-//               <button class="win-btn">Add Win</button>
-//               <button class="lose-btn">Add Loss</button>
-//               <button class="delete-btn">Delete</button>
-//             </td>
-//           </tr>
-//         `;
-//         tbodyEl.insertAdjacentHTML('beforeend', newRow);
-    
-//         // Add event listeners to new row
-//         const winBtn = tbodyEl.querySelector('tr:last-child .win-btn');
-//         const loseBtn = tbodyEl.querySelector('tr:last-child .lose-btn');
-//         const deleteBtn = tbodyEl.querySelector('tr:last-child .delete-btn');
-//         winBtn.addEventListener('click', onAddWin);
-//         loseBtn.addEventListener('click', onAddLose);
-//         deleteBtn.addEventListener('click', onDeleteRow);
-//         document.getElementById('name').value = '';
-// }
-
-// function onDeleteRow(e) {
-//     if (!e.target.classList.contains("delete-btn")) {
-//         return;
-//     }
-//     const delBtn = e.target;
-//     delBtn.closest('tr').remove();
-// }
-
-*/

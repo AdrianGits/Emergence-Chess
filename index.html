@@ -16,11 +16,11 @@
     <div class="new-player-form">
         <form id="new-player-form">
             <div class="input-row">
-                <label for="Name" class="nameLabel">Name: </label>
+                <label for="Name" class="textLabel">Name: </label>
                 <input type="text" name="name" id="name" class="nameBox" required />
             </div>
             <div class="input-row">
-                <label for="elo" class="eloLabel">ELO Rating: </label>
+                <label for="elo" class="textLabel">ELO Rating: </label>
                 <input type="number" name="elo" id="elo" value="1200" class="eloBox" required />
             </div>
             <div class="button-row">
@@ -28,6 +28,49 @@
             </div>
         </form>
     </div>
+
+<div class="result-form">
+    <form id="result-form">
+        <label for="winner-select" class="textLabel">Winner:</label>
+        <select id="winner-select" name="winner" style="height:2.5vh;">
+            <option value="">---</option>
+        </select>
+        <label for="loser-select" class="textLabel">Loser:</label>
+        <select id="loser-select" name="loser" style="height:2.5vh;">
+            <option value="">---</option>
+    
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        const players = JSON.parse(localStorage.getItem('players')) || [];
+        players.sort((a, b) => a.name.localeCompare(b.name));
+        const winnerSelect = document.getElementById('winner-select');
+        const loserSelect = document.getElementById('loser-select');
+        players.forEach(player => {
+            const winnerOption = document.createElement('option');
+            const loserOption = document.createElement('option');
+            winnerOption.value = player.name;
+            winnerOption.textContent = player.name;
+            loserOption.value = player.name;
+            loserOption.textContent = player.name;
+            winnerSelect.appendChild(winnerOption);
+            loserSelect.appendChild(loserOption);
+        });
+    </script>
+</div>
+
+
+<div class="spacer" style="height: 10vh;">
+</div>
+
+
+
+
+    
+
+
+
     <div class="leaderboard-div">
         <table class="table table-sortable" id="leaderboard-table">
             <tbody>

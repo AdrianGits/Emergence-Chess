@@ -120,7 +120,7 @@ h1 {
   background-color: #197e50; /* Change to desired button background color on hover */
 }
 
-.nameLabel, .eloLabel {
+.textLabel {
   font-size: 0.8vw;
   text-decoration: underline;
 }
