@@ -7,73 +7,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chess App</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 
+<div class="header">
+    <img src="face-right.png" style="height: 5vh; padding-right: 0.6vw;">
+    <h1 class="neon">Emergence Chess Leaderboard</h1>
+    <img src="face-left.png" style="height: 5vh; padding-left: 0.6vw;">
+</div>
+
 <body>
-    <h1>Emergence Chess Leaderboard</h1>
-    <!-- Add Player Form -->
-    <div class="new-player-form">
-        <form id="new-player-form">
-            <div class="input-row">
-                <label for="Name" class="textLabel">Name: </label>
-                <input type="text" name="name" id="name" class="nameBox" required />
-            </div>
-            <div class="input-row">
-                <label for="elo" class="textLabel">ELO Rating: </label>
-                <input type="number" name="elo" id="elo" value="1200" class="eloBox" required />
-            </div>
-            <div class="button-row">
-                <button id="add-new-player-btn">Add New Player</button>
-            </div>
-        </form>
+    <div class="forms-div">
+        <div class="new-player-form">
+            <form id="new-player-form">
+                <div class="input-row">
+                    <label for="Name" class="textLabel">Name: </label>
+                    <input type="text" name="name" id="name" class="nameBox" required />
+                </div>
+                <div class="input-row">
+                    <label for="elo" class="textLabel">ELO Rating: </label>
+                    <input type="number" name="elo" id="elo" value="1200" class="eloBox" required />
+                </div>
+                <div class="button-row">
+                    <button id="add-new-player-btn">Add New Player</button>
+                </div>
+            </form>
+        </div>
+        <div class="result-form">
+            <form id="result-form">
+                <label for="winner-select" class="textLabel">Winner:</label>
+                    <select id="winner-select" name="winner" style="height:2.5vh; width: 13vh; margin-right: 3vw;">
+                        <option value="">---</option>
+                    </select>
+                <label for="loser-select" class="textLabel">Loser:</label>
+                    <select id="loser-select" name="loser" style="height:2.5vh; width: 13vh;">
+                        <option value="">---</option>
+                    </select>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </div>
-
-<div class="result-form">
-    <form id="result-form">
-        <label for="winner-select" class="textLabel">Winner:</label>
-        <select id="winner-select" name="winner" style="height:2.5vh;">
-            <option value="">---</option>
-        </select>
-        <label for="loser-select" class="textLabel">Loser:</label>
-        <select id="loser-select" name="loser" style="height:2.5vh;">
-            <option value="">---</option>
-    
-        </select>
-        <input type="submit" value="Submit">
-    </form>
-    <script>
-        const players = JSON.parse(localStorage.getItem('players')) || [];
-        players.sort((a, b) => a.name.localeCompare(b.name));
-        const winnerSelect = document.getElementById('winner-select');
-        const loserSelect = document.getElementById('loser-select');
-        players.forEach(player => {
-            const winnerOption = document.createElement('option');
-            const loserOption = document.createElement('option');
-            winnerOption.value = player.name;
-            winnerOption.textContent = player.name;
-            loserOption.value = player.name;
-            loserOption.textContent = player.name;
-            winnerSelect.appendChild(winnerOption);
-            loserSelect.appendChild(loserOption);
-        });
-    </script>
-</div>
-
-
-<div class="spacer" style="height: 10vh;">
-</div>
-
-
-
-
-    
-
-
-
-    <div class="leaderboard-div">
-        <table class="table table-sortable" id="leaderboard-table">
-            <tbody>
+<!-- Just a spacer -->
+<div class="spacer" style="height: 10vh;"></div>
+<!-- -->
+<div class="leaderboard-div">
+    <table class="table table-sortable" id="leaderboard-table">
+        <tbody>
             <tr>
                 <!-- Table Headings -->
                 <th>Ranking</th>
@@ -85,43 +63,18 @@
                 <th>Actions</th>
             </tr>
         </table>
-        <tr id="empty-state-row" style="display:none;">
+            <tr id="empty-state-row" style="display:none;">
         </tbody>
     </div>
+    <button id="save-btn" style="margin-right: 2vw;">Save Table to .txt</button>
+    <input type="file" id="load-file" accept=".txt">
+    <button id="load-btn">Load Table from .txt</button>
 
-    Adrian development buttons
-
-    <button id="seed-data-btn">Seed Data</button>
-
-<script>
-document.getElementById('seed-data-btn').addEventListener('click', onSeedDataButtonClick);
-
-// Function to seed localStorage with initial player data
-function seedLocalStorageData() {
-    // Create an array of player objects with initial win/loss data
-    const players = [
-        { name: 'Nikil Deo', elo: 1200, wins: 1, losses: 0, wlRatio: 0},
-        { name: 'Adrian Chan', elo: 1000, wins: 4, losses: 3, wlRatio: 0},
-        { name: 'Aaron Calbert', elo: 800, wins: 1, losses: 2, wlRatio: 0},
-        { name: 'Chali Tillikaratne', elo: 1100, wins: 2, losses: 1, wlRatio: 0}
-    ];
-
-    // Store the player data in localStorage
-    localStorage.setItem('players', JSON.stringify(players));
-}
-
-// Function to handle button click event for seeding localStorage data
-function onSeedDataButtonClick() {
-    // Call the seedLocalStorageData function to seed localStorage data
-    seedLocalStorageData();
-    location.reload();
-}
-</script>
-
-<button id='clear-btn'>Clear</button>
-
-
-    <script src="script.js"></script>    
+    <div id="secret-buttons" class="secret-buttons">
+        <span>Adrian development buttons (delete later)</span>
+        <button id="seed-data-btn">Seed Data</button>
+        <button id='clear-btn'>Clear Table</button>
+    </div>
+<script src="script.js"></script>    
 </body>
-
 </html>

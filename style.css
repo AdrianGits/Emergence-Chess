@@ -6,22 +6,37 @@ h1, * {
     font-family: 'Archia', 'sans-serif';
 }
 
-h1 {
-  font-size: 1.5vw;
+body {
+  margin: 0 auto;
+  background-image: url('bg-image.jpeg');
+  background-size: cover;
+
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+
+        -webkit-animation-direction: alternate;
+        animation-direction: alternate;   
 }
 
-/* table {
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 0.7vw;
-  }
+@keyframes slidein {
+  from {background-position: top;background-size:3000px; }
+  to {background-position: -100px 0px;background-size:2750px;}
   
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    user-select: none;
-  } */
+  }
+
+h1 {
+  font-size: 1vw;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.leaderboard-div {
+  margin-left: 8px;
+  margin-right: 8px;
+}
 
   table {
     width: 100%;
@@ -43,10 +58,15 @@ h1 {
 
   th {
     text-align: center;
+    background: white;
   }
 
   td {
     text-align: center;
+  }
+
+  tr {
+    background-color: silver;
   }
 
   .arrow {
@@ -65,11 +85,6 @@ h1 {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }
-
-  .new-player-form {
-    max-width: 10vw;
-    margin: 0 auto;
-}
 
 .input-row {
     display: flex;
@@ -105,19 +120,20 @@ h1 {
 
 #add-new-player-btn {
   padding: 0.5vh 0.5vh;
-  background-color: #21B573; /* Change to desired button background color */
-  color: #fff; /* Change to desired button text color */
+  background-color: #21B573;
+  color: #fff;
   border: none;
   cursor: pointer;
-  font-size: 0.6vw; /* Change to desired button font size */
-  font-weight: bold; /* Change to desired button font weight */
-  transition: background-color 0.3s ease; /* Add smooth transition effect on hover */
+  font-size: 0.6vw;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
   margin-top: 0.4vw;
   margin-bottom: 1.5vw;
+  border-radius: 10px;
 }
 
 #add-new-player-btn:hover {
-  background-color: #197e50; /* Change to desired button background color on hover */
+  background-color: #197e50;
 }
 
 .textLabel {
@@ -128,3 +144,110 @@ h1 {
 .win-btn, .lose-btn, .delete-btn {
   font-size: 0.5vw;
 }
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  
+
+.neon {
+  color: #eeeded;
+  text-shadow:
+    0 0 5px #969393,
+    0 0 10px #969393,
+    0 0 20px #f7f5f5;
+  font-size: 1.5vw;
+}
+
+.forms-div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.new-player-form {
+  max-width: 10vw;
+  margin-top: 0.5vw;
+  align-items: center;
+}
+
+.result-form {
+  display: flex;
+  align-items: center;
+}
+
+span {
+  color: white;
+  font-weight: 500;
+}
+
+
+/* Re-enable before launch */
+.secret-buttons {
+  /* display: none; */
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  padding-bottom: 0.25vw;
+}
+
+#load-file {
+  color: white;
+  display: none;
+}
+
+#save-btn {
+  padding: 0.5vh 0.5vh;
+  background-color: #21B573;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 0.6vw;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 0.4vw;
+  margin-bottom: 1.5vw;
+  border-radius: 10px;
+}
+
+#load-btn {
+  padding: 0.5vh 0.5vh;
+  background-color: #21B573;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 0.6vw;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 0.4vw;
+  margin-bottom: 1.5vw;
+  border-radius: 10px;
+}
+
+#save-btn:hover, #load-btn:hover {
+  background-color: #197e50;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
