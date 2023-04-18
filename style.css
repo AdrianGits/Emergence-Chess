@@ -40,7 +40,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: calc(10px + 0.5vw);
+  margin-top: calc(20px + 0.5vw);
 }
 
 h1 {
