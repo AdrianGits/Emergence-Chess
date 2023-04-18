@@ -10,9 +10,9 @@
 </head>
 
 <div class="header">
-    <img src="face-right.png" style="height: 5vw; padding-right: 0.6vw;">
+    <img src="face-right.png" style="height: calc(1rem + 2vw); padding-right: 0.6vw;">
     <h1 class="neon">Emergence Chess Leaderboard</h1>
-    <img src="face-left.png" style="height: 5vw; padding-left: 0.6vw;">
+    <img src="face-left.png" style="height: calc(1rem + 2vw); padding-left: 0.6vw;">
 </div>
 
 <body>
@@ -35,7 +35,7 @@
         <div class="result-form">
             <form id="result-form">
                 <label for="winner-select" class="textLabel" style="color: blue;">Winner:</label>
-                    <select id="winner-select" name="winner"">
+                    <select id="winner-select" name="winner">
                         <option value="">---</option>
                     </select>
                 <label for="loser-select" class="textLabel"  style="color: red;">Loser:</label>
@@ -54,7 +54,6 @@
         <tbody>
             <tr>
                 <!-- Table Headings -->
-                <th>Ranking</th>
                 <th>Name</th>
                 <th id="rating-header">Rating <i class="arrow down" id="rating-arrow"></i></th>
                 <th>Wins</th>

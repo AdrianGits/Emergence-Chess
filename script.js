@@ -38,15 +38,12 @@ function onAddPlayer(e) {
   const tbodyEl = document.querySelector('#leaderboard-table tbody');
   const newRow = `
       <tr>
-        <td></td>
         <td>${nameInput}</td>
         <td>${eloInput}</td>
         <td>0</td>
         <td>0</td>
         <td></td>
         <td>
-          <button class="win-btn">Add Win</button>
-          <button class="lose-btn">Add Loss</button>
           <button class="delete-btn">Delete</button>
         </td>
       </tr>
@@ -85,15 +82,12 @@ document.addEventListener('DOMContentLoaded', function () {
   for (const player of players) {
     const newRow = `
         <tr>
-          <td></td>
           <td>${player.name}</td>
           <td>${player.elo}</td>
           <td>${player.wins}</td>
           <td>${player.losses}</td>
           <td>${player.wlRatio}</td>
           <td>
-            <button class="win-btn">Add Win</button>
-            <button class="lose-btn">Add Loss</button>
             <button class="delete-btn">Delete</button>
           </td>
         </tr>
@@ -101,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
     tbodyEl.insertAdjacentHTML('beforeend', newRow);
   }
 });
+
 
 function onAddWin(e) {
   if (!e.target.classList.contains("win-btn")) {
@@ -174,7 +169,7 @@ function onDeleteRow(e) {
   }
   const delBtn = e.target;
   const row = delBtn.closest('tr');
-  const playerName = row.querySelector('td:nth-child(2)').textContent;
+  const playerName = row.querySelector('td:nth-child(1)').textContent;
   row.remove();
 
   // Remove player from localStorage

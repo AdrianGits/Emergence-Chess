@@ -43,7 +43,7 @@ h1 {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 5px;
-    font-size: calc(1rem + 1vw);
+    font-size: calc(1rem + 0.3vw);
   }
 
   th, td {
@@ -170,10 +170,8 @@ h1 {
 }
 
 .new-player-form {
-  max-width: 10vw;
   margin-top: 0.5vw;
   align-items: center;
-  width: 500px;
   display: flex;
 }
 
@@ -236,8 +234,8 @@ span {
 
 #winner-select {
   height: 40px;
-  width: 250px;
-  margin-right: 3vw;
+  width: 20%;
+  margin-right: 10px;
   font-size: calc(1rem + 0.1vw);
   border: 3px solid black;
   color: blue;
@@ -245,8 +243,8 @@ span {
 
 #loser-select {
   height:40px;
-  width: 250px;
-  margin-right: 3vw;
+  width: 20%;
+  margin-right: 10px;
   font-size: calc(1rem + 0.1vw);
   border: 3px solid black;
   color: red;
@@ -258,7 +256,7 @@ span {
   color: #fff;
   border: none;
   cursor: pointer;
-  font-size: calc(1rem + 0.5vw);
+  font-size: calc(1rem + 0.1vw);
   font-weight: bold;
   transition: background-color 0.3s ease;
   margin-top: 2vw;
