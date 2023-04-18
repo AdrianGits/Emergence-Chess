@@ -35,15 +35,15 @@ h1 {
 }
 
 .leaderboard-div {
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
   table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 5px;
-    font-size: calc(1rem + 0.3vw);
+    font-size: calc(1rem + 0.1vw);
   }
 
   th, td {
@@ -72,10 +72,10 @@ h1 {
 
   .arrow {
     border: solid black;
-    border-width: 0 7px 7px 0;
+    border-width: 0 5px 5px 0;
     display: inline-block;
     padding: 3px;
-    margin-bottom: 0.5vw;
+    align-items: center;
   }
  
   .up {
@@ -92,6 +92,7 @@ h1 {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
+    align-items: center;
 }
 
 .textLabel {
@@ -101,12 +102,12 @@ h1 {
 
 .input-row label {
     margin-bottom: 5px;
+
 }
 
 .input-row input {
-    flex: 1;
-    flex-basis: 20%;
     text-align: center;
+    width: calc(1em * 10);
     font-size: calc(1rem + 0.1vw);
     border: 3px solid black;
 }
