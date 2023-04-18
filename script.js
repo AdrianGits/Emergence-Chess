@@ -1,4 +1,3 @@
-
 const newPlayerFormEl = document.querySelector('#new-player-form');
 const tbodyEl = document.querySelector('tbody');
 const tableEl = document.querySelector('table');
@@ -253,28 +252,38 @@ const form = document.getElementById('result-form');
 form.addEventListener('submit', onSubmitForm);
 
 
-
-
-
-
-
-
-
-
-
 // Hidden button sequence for developer buttons
 const hiddenButtonSequence = ['1', '2', '3', 'a', 'd'];
 // Keep track of the user's input
 let userInput = [];
+// Variable to keep track of whether the hidden buttons are visible or not
+let hiddenButtonsVisible = false;
 // Add event listener to listen for key presses
 document.addEventListener('keydown', function (event) {
-  // Add the pressed key to the user's input
-  userInput.push(event.key);
-  // Check if the user's input matches the hidden button sequence
-  if (userInput.join('') === hiddenButtonSequence.join('')) {
-    // Trigger the hidden buttons container by changing its display property to 'block'
-    document.getElementById('secret-buttons').style.display = 'block';
-    // Clear the user's input
+  // Check if the pressed key matches the next key in the hidden button sequence
+  if (event.key === hiddenButtonSequence[userInput.length]) {
+    // Add the pressed key to the user's input
+    userInput.push(event.key);
+    // Check if the user's input matches the hidden button sequence
+    if (userInput.join('') === hiddenButtonSequence.join('')) {
+      // If the hidden buttons are not visible, show them
+      if (!hiddenButtonsVisible) {
+        // Trigger the hidden buttons container by changing its display property to 'block'
+        document.getElementById('secret-buttons').style.display = 'block';
+        // Set hiddenButtonsVisible to true
+        hiddenButtonsVisible = true;
+      } else {
+        // If the hidden buttons are already visible, hide them
+        // Trigger the hidden buttons container by changing its display property to 'none'
+        document.getElementById('secret-buttons').style.display = 'none';
+        // Set hiddenButtonsVisible to false
+        hiddenButtonsVisible = false;
+      }
+      // Clear the user's input
+      userInput = [];
+    }
+  } else {
+    // If the pressed key does not match the next key in the hidden button sequence, reset the user's input
     userInput = [];
   }
 });
