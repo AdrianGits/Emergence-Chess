@@ -159,8 +159,8 @@ h1 {
 .neon {
   color: #eeeded;
   text-shadow:
-    0 0 5px #969393,
-    0 0 10px #969393,
+    0 0 5px #1a1a1a,
+    0 0 10px #000000,
     0 0 20px #f7f5f5;
 }
 
@@ -207,7 +207,7 @@ span {
   color: #fff;
   border: none;
   cursor: pointer;
-  font-size: calc(1rem + 0.1vw);
+  font-size: calc(10px + 0.1vw);
   font-weight: bold;
   transition: background-color 0.3s ease;
   margin-top: 0.4vw;
@@ -221,7 +221,7 @@ span {
   color: #fff;
   border: none;
   cursor: pointer;
-  font-size: calc(1rem + 0.1vw);
+  font-size: calc(10px + 0.1vw);
   font-weight: bold;
   transition: background-color 0.3s ease;
   margin-top: 0.4vw;
