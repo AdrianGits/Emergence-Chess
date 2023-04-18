@@ -16,6 +16,29 @@
 </div>
 
 <body>
+<!-- Just a spacer -->
+<!-- <div class="spacer" style="height: 10vh;"></div> -->
+<!-- -->
+<div class="leaderboard-div">
+    <table class="table table-sortable" id="leaderboard-table">
+        <tbody>
+            <tr>
+                <!-- Table Headings -->
+                <th>Name</th>
+                <th id="rating-header">Rating <i class="arrow down" id="rating-arrow"></i></th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>W/L Ratio</th>
+                <th>Actions</th>
+            </tr>
+        </table>
+            <tr id="empty-state-row" style="display:none;">
+        </tbody>
+    </div>
+    <button id="save-btn" style="margin-right: 2vw;">Save Table to .txt</button>
+    <input type="file" id="load-file" accept=".txt">
+    <button id="load-btn">Load Table from .txt</button>
+
     <div class="forms-div">
         <div class="new-player-form">
             <form id="new-player-form">
@@ -46,28 +69,6 @@
             </form>
         </div>
     </div>
-<!-- Just a spacer -->
-<!-- <div class="spacer" style="height: 10vh;"></div> -->
-<!-- -->
-<div class="leaderboard-div">
-    <table class="table table-sortable" id="leaderboard-table">
-        <tbody>
-            <tr>
-                <!-- Table Headings -->
-                <th>Name</th>
-                <th id="rating-header">Rating <i class="arrow down" id="rating-arrow"></i></th>
-                <th>Wins</th>
-                <th>Losses</th>
-                <th>W/L Ratio</th>
-                <th>Actions</th>
-            </tr>
-        </table>
-            <tr id="empty-state-row" style="display:none;">
-        </tbody>
-    </div>
-    <button id="save-btn" style="margin-right: 2vw;">Save Table to .txt</button>
-    <input type="file" id="load-file" accept=".txt">
-    <button id="load-btn">Load Table from .txt</button>
 
     <div id="secret-buttons" class="secret-buttons">
         <span>Adrian development buttons (delete later)</span>
