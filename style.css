@@ -102,11 +102,13 @@ td {
 }
 
 tr {
-  background-color: rgb(182, 182, 182);
+  /* background-color: rgb(182, 182, 182); */
+  background-color: white;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  /* background-color: #dddddd; */
+  background-color: rgb(235, 235, 235);
 }
 
 .arrow {
