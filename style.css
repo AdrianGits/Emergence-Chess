@@ -43,7 +43,7 @@ h1 {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 5px;
-    font-size: calc(1rem + 0.1vw);
+    font-size: calc(14px + 0.1vw);
   }
 
   th, td {
@@ -146,7 +146,7 @@ h1 {
 }
 
 .win-btn, .lose-btn, .delete-btn {
-  font-size: calc(1rem + 0.1vw);
+  font-size: calc(10px + 0.1vw);
 }
 
 .header {
