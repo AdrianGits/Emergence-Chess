@@ -1,3 +1,7 @@
+window.onload = function () {
+  sortTable();
+};
+
 const newPlayerFormEl = document.querySelector('#new-player-form');
 const tbodyEl = document.querySelector('tbody');
 const tableEl = document.querySelector('table');
@@ -49,12 +53,8 @@ function onAddPlayer(e) {
     `;
   tbodyEl.insertAdjacentHTML('beforeend', newRow);
 
-  // Add event listeners to new row
-  // const winBtn = tbodyEl.querySelector('tr:last-child .win-btn');
-  // const loseBtn = tbodyEl.querySelector('tr:last-child .lose-btn');
+
   const deleteBtn = tbodyEl.querySelector('tr:last-child .delete-btn');
-  // winBtn.addEventListener('click', onAddWin);
-  // loseBtn.addEventListener('click', onAddLose);
   deleteBtn.addEventListener('click', onDeleteRow);
 
   // Save player to local storage
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <td>${player.losses}</td>
           <td>${player.wlRatio}</td>
           <td>
-            <button class="delete-btn">Delete</button>
+            <button class="delete-btn" onclick="confDel()">Delete</button>
           </td>
         </tr>
       `;
@@ -150,10 +150,6 @@ function onAddLose(e) {
   }
 }
 
-
-
-
-
 function calculateWLRatio(wins, losses) {
   if (losses === 0) {
     return wins.toFixed(2);
@@ -176,10 +172,6 @@ function onDeleteRow(e) {
   const updatedPlayers = players.filter(player => player.name !== playerName);
   localStorage.setItem('players', JSON.stringify(updatedPlayers));
 }
-
-window.onload = function () {
-  sortTable();
-};
 
 newPlayerFormEl.addEventListener('submit', onAddPlayer);
 tableEl.addEventListener('click', onAddWin);
@@ -384,3 +376,7 @@ players.forEach(player => {
   winnerSelect.appendChild(winnerOption);
   loserSelect.appendChild(loserOption);
 });
+
+function confDel() {
+  return confirm("Are you sure you want to delete this player?");
+}
