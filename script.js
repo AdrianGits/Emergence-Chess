@@ -51,11 +51,11 @@ function onAddPlayer(e) {
   tbodyEl.insertAdjacentHTML('beforeend', newRow);
 
   // Add event listeners to new row
-  const winBtn = tbodyEl.querySelector('tr:last-child .win-btn');
-  const loseBtn = tbodyEl.querySelector('tr:last-child .lose-btn');
+  // const winBtn = tbodyEl.querySelector('tr:last-child .win-btn');
+  // const loseBtn = tbodyEl.querySelector('tr:last-child .lose-btn');
   const deleteBtn = tbodyEl.querySelector('tr:last-child .delete-btn');
-  winBtn.addEventListener('click', onAddWin);
-  loseBtn.addEventListener('click', onAddLose);
+  // winBtn.addEventListener('click', onAddWin);
+  // loseBtn.addEventListener('click', onAddLose);
   deleteBtn.addEventListener('click', onDeleteRow);
 
   // Save player to local storage
@@ -103,16 +103,16 @@ function onAddWin(e) {
   }
   const winBtn = e.target;
   const row = winBtn.closest("tr");
-  const winsCell = row.querySelector("td:nth-child(4)");
+  const winsCell = row.querySelector("td:nth-child(3)");
   let wins = parseInt(winsCell.textContent);
   wins++;
   winsCell.textContent = wins;
 
-  const lossesCell = row.querySelector("td:nth-child(5)");
+  const lossesCell = row.querySelector("td:nth-child(4)");
   let losses = parseInt(lossesCell.textContent);
 
-  const wlRatioCell = row.querySelector("td:nth-child(6)");
-  const playerName = row.querySelector("td:nth-child(2)").textContent;
+  const wlRatioCell = row.querySelector("td:nth-child(5)");
+  const playerName = row.querySelector("td:nth-child(1)").textContent;
   const players = JSON.parse(localStorage.getItem('players')) || [];
   const playerIndex = players.findIndex(player => player.name === playerName);
 
@@ -130,16 +130,16 @@ function onAddLose(e) {
   }
   const loseBtn = e.target;
   const row = loseBtn.closest("tr");
-  const lossesCell = row.querySelector("td:nth-child(5)");
+  const lossesCell = row.querySelector("td:nth-child(4)");
   let losses = parseInt(lossesCell.textContent);
   losses++;
   lossesCell.textContent = losses;
 
-  const winsCell = row.querySelector("td:nth-child(4)");
+  const winsCell = row.querySelector("td:nth-child(5)");
   let wins = parseInt(winsCell.textContent);
 
-  const wlRatioCell = row.querySelector("td:nth-child(6)");
-  const playerName = row.querySelector("td:nth-child(2)").textContent;
+  const wlRatioCell = row.querySelector("td:nth-child(5)");
+  const playerName = row.querySelector("td:nth-child(1)").textContent;
   const players = JSON.parse(localStorage.getItem('players')) || [];
   const playerIndex = players.findIndex(player => player.name === playerName);
 
@@ -263,7 +263,7 @@ form.addEventListener('submit', onSubmitForm);
 
 
 // Hidden button sequence for developer buttons
-const hiddenButtonSequence = ['g', 'o', 'd', 'a', 'd', 'r', 'i', 'a', 'n'];
+const hiddenButtonSequence = ['1', '2', '3', 'a', 'd'];
 // Keep track of the user's input
 let userInput = [];
 // Add event listener to listen for key presses
