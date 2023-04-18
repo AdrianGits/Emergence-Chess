@@ -9,31 +9,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+<!-- <img class="web-logo" src="weblogo.png"> -->
 <div class="header">
     <img src="face-right.png" style="height: calc(1rem + 2vw); padding-right: 0.6vw;">
-    <h1 class="neon">Emergence Chess Leaderboard</h1>
+    <img class="web-logo" src="weblogo.png">
+    <h1 class="neon">Chess Leaderboard</h1>
     <img src="face-left.png" style="height: calc(1rem + 2vw); padding-left: 0.6vw;">
 </div>
 
 <body>
-<!-- Just a spacer -->
-<!-- <div class="spacer" style="height: 10vh;"></div> -->
-<!-- -->
-<div class="leaderboard-div">
-    <table class="table table-sortable" id="leaderboard-table">
-        <tbody>
-            <tr>
-                <!-- Table Headings -->
-                <th>Name</th>
-                <th id="rating-header">Rating <i class="arrow down" id="rating-arrow"></i></th>
-                <th>Wins</th>
-                <th>Losses</th>
-                <th>W/L Ratio</th>
-                <th>Actions</th>
-            </tr>
+    <!-- Just a spacer -->
+    <!-- <div class="spacer" style="height: 10vh;"></div> -->
+    <!-- -->
+    <div class="leaderboard-div">
+        <table class="table table-sortable" id="leaderboard-table">
+            <tbody>
+                <tr>
+                    <!-- Table Headings -->
+                    <th>Name</th>
+                    <th id="rating-header">Rating <i class="arrow down" id="rating-arrow"></i></th>
+                    <th>Wins</th>
+                    <th>Losses</th>
+                    <th>W/L Ratio</th>
+                    <th>Actions</th>
+                </tr>
         </table>
-            <tr id="empty-state-row" style="display:none;">
-        </tbody>
+        <tr id="empty-state-row" style="display:none;">
+            </tbody>
     </div>
     <button id="save-btn" style="margin-right: 2vw;">Save Table to .txt</button>
     <input type="file" id="load-file" accept=".txt">
@@ -58,13 +60,13 @@
         <div class="result-form">
             <form id="result-form">
                 <label for="winner-select" class="textLabel" style="">Winner:</label>
-                    <select id="winner-select" name="winner">
-                        <option value="">---</option>
-                    </select>
-                <label for="loser-select" class="textLabel"  style="">Loser:</label>
-                    <select id="loser-select" name="loser">
-                        <option value="">---</option>
-                    </select>
+                <select id="winner-select" name="winner">
+                    <option value="">---</option>
+                </select>
+                <label for="loser-select" class="textLabel" style="">Loser:</label>
+                <select id="loser-select" name="loser">
+                    <option value="">---</option>
+                </select>
                 <input type="submit" value="Submit" id="submit-results">
             </form>
         </div>
@@ -75,6 +77,7 @@
         <button id="seed-data-btn">Seed Data</button>
         <button id='clear-btn'>Clear Table</button>
     </div>
-<script src="script.js"></script>    
+    <script src="script.js"></script>
 </body>
+
 </html>

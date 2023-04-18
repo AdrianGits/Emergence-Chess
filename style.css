@@ -4,95 +4,134 @@ html {
   font-size: 16px;
 }
 
-h1, * {
-    text-decoration: bold;
-    text-align: center;
-    font-family: 'Archia', 'sans-serif';
+h1,
+* {
+  text-decoration: bold;
+  text-align: center;
+  font-family: 'Archia', 'sans-serif';
 }
 
 body {
   margin: 0 auto;
   background-image: url('bg-image.jpeg');
   background-size: cover;
-        -webkit-animation-fill-mode: forwards;
-        animation-fill-mode: forwards;
-        -webkit-animation-iteration-count: infinite;
-        animation-iteration-count: infinite;
-        -webkit-animation-direction: alternate;
-        animation-direction: alternate;   
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
 }
 
 @keyframes slidein {
-  from {background-position: top;background-size:3000px; }
-  to {background-position: -100px 0px;background-size:2750px;}
-  
+  from {
+    background-position: top;
+    background-size: 3000px;
   }
+
+  to {
+    background-position: -100px 0px;
+    background-size: 2750px;
+  }
+
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: calc(10px + 0.5vw);
+}
 
 h1 {
   font-size: calc(1rem + 2vw);
   text-transform: uppercase;
   user-select: none;
+  align-items: center;
+}
+
+.web-logo {
+  padding-top: 1vw;
+  height: calc(1rem + 2vw);
+}
+
+.neon {
+  color: #eeeded;
+  text-shadow:
+    0 0 5px #1a1a1a,
+    0 0 10px #000000,
+    0 0 20px #f7f5f5;
+  margin: 0;
+  align-items: center;
+  padding-left: calc(10px + 0.5vw);
 }
 
 .leaderboard-div {
   margin-left: 20px;
   margin-right: 20px;
+  margin-top: calc(20px + 0.5vw);
 }
 
-  table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 5px;
-    font-size: calc(14px + 0.1vw);
-  }
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 5px;
+  font-size: calc(14px + 0.1vw);
+}
 
-  th, td {
-    text-align: left;
-    padding: 8px;
-    border: 1px solid black;
-    user-select: none;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+th,
+td {
+  text-align: left;
+  padding: 5px;
+  border: 1px solid black;
+  user-select: none;
+}
 
-  th {
-    text-align: center;
-    background: white;
-  }
+th {
+  padding: 7.5px;
+  text-align: center;
+  background: black;
+  border: 1px solid white;
+  color: white;
+  text-decoration: underline;
+  font-size: calc(14px + 0.2vw);
+}
 
-  td {
-    text-align: center;
-  }
+td {
+  text-align: center;
+}
 
-  tr {
-    background-color: silver;
-  }
+tr {
+  background-color: rgb(182, 182, 182);
+}
 
-  .arrow {
-    border: solid black;
-    border-width: 0 5px 5px 0;
-    display: inline-block;
-    padding: 3px;
-    align-items: center;
-  }
- 
-  .up {
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-  }
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
 
-  .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-  }
+.arrow {
+  border: solid white;
+  border-width: 0 5px 5px 0;
+  display: inline-block;
+  padding: 3px;
+  align-items: center;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
 
 .input-row {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  align-items: center;
 }
 
 .textLabel {
@@ -101,25 +140,25 @@ h1 {
 }
 
 .input-row label {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 
 }
 
 .input-row input {
-    text-align: center;
-    width: calc(1em * 10);
-    font-size: calc(1rem + 0.1vw);
-    border: 3px solid black;
+  text-align: center;
+  width: calc(1em * 10);
+  font-size: calc(1rem + 0.1vw);
+  border: 3px solid black;
 }
 
 .input-row input[type="number"]::-webkit-inner-spin-button,
 .input-row input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .input-row input[type="number"] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 #add-new-player-btn {
@@ -141,27 +180,14 @@ h1 {
 }
 
 .button-row {
-    margin-top: 10px;
-    margin-bottom: 1vh;
+  margin-top: 10px;
+  margin-bottom: 1vh;
 }
 
-.win-btn, .lose-btn, .delete-btn {
+.win-btn,
+.lose-btn,
+.delete-btn {
   font-size: calc(10px + 0.1vw);
-}
-
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  }
-  
-
-.neon {
-  color: #eeeded;
-  text-shadow:
-    0 0 5px #1a1a1a,
-    0 0 10px #000000,
-    0 0 20px #f7f5f5;
 }
 
 .forms-div {
@@ -229,7 +255,8 @@ span {
   border-radius: 10px;
 }
 
-#save-btn:hover, #load-btn:hover {
+#save-btn:hover,
+#load-btn:hover {
   background-color: #197e50;
 }
 
@@ -273,22 +300,6 @@ span {
   height: 500px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+::-webkit-scrollbar {
+  width: 0;
+}
