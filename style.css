@@ -195,6 +195,7 @@ tr:nth-child(even) {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  float: 
 }
 
 .new-player-form {
@@ -213,10 +214,8 @@ span {
   font-weight: 500;
 }
 
-
-/* Re-enable before launch */
 .secret-buttons {
-  /* display: none; */
+  display: none;
   bottom: 0;
   position: fixed;
   width: 100%;
