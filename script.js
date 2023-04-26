@@ -63,8 +63,9 @@ function onAddPlayer(e) {
     elo: eloInput,
     wins: 0,
     losses: 0,
-    wlRatio: 0
+    wlRatio: 0.00.toFixed(2)
   };
+  
   const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : [];
   players.push(player);
   localStorage.setItem('players', JSON.stringify(players));
@@ -72,8 +73,6 @@ function onAddPlayer(e) {
   document.getElementById('name').value = '';
   location.reload();
 }
-
-
 // Load players from local storage and display them in the table
 document.addEventListener('DOMContentLoaded', function () {
   const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : [];
@@ -225,8 +224,16 @@ function onSubmitForm(e) {
   loser.losses++;
 
   // Update win/loss ratio
-  winner.wlRatio = (winner.wins / (winner.wins + winner.losses)).toFixed(2);
-  loser.wlRatio = (loser.wins / (loser.wins + loser.losses)).toFixed(2);
+  if(winner.losses === 0) {
+    winner.wlRatio = winner.wins.toFixed(2);
+  } else {
+    winner.wlRatio = (winner.wins / winner.losses).toFixed(2);
+    loser.wlRatio = (loser.wins / loser.losses).toFixed(2);
+  }
+
+  // Win Rate Formulas
+  // winner.wlRatio = (winner.wins / (winner.wins + winner.losses)).toFixed(2);
+  // loser.wlRatio = (loser.wins / (loser.wins + loser.losses)).toFixed(2);
 
   // Save updated players to local storage
   localStorage.setItem('players', JSON.stringify(players));
