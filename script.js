@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <td>${player.wins}</td>
           <td>${player.losses}</td>
           <td>${player.draws}</td>
-          <td>${player.wlRatio}</td>
+          <td>${player.wlRatio}%</td>
           <td>
             <button class="delete-btn" onclick="confDel()">Delete</button>
           </td>
@@ -196,8 +196,8 @@ function onAddDraw() {
     loser.wlRatio = (loser.wins / loser.losses).toFixed(2);
   }
 
-  winner.wldRatio = (winner.wins + 0.5 * winner.draws) / (winner.wins + winner.losses + winner.draws);
-  loser.wldRatio = (loser.wins + 0.5 * loser.draws) / (loser.wins + loser.losses + loser.draws);
+  winner.wlRatio = (winner.wins / (winner.wins + winner.losses + winner.draws) * 100).toFixed(2);
+  loser.wlRatio = (loser.wins / (loser.wins + loser.losses + loser.draws) * 100).toFixed(2);
 
   // Save updated players to local storage
   localStorage.setItem('players', JSON.stringify(players));
@@ -284,17 +284,20 @@ function onSubmitForm(e) {
   winner.wins++;
   loser.losses++;
 
-  // Update win/loss ratio
-  if(winner.losses === 0) {
-    winner.wlRatio = winner.wins.toFixed(2);
-  } else {
-    winner.wlRatio = (winner.wins / winner.losses).toFixed(2);
-    loser.wlRatio = (loser.wins / loser.losses).toFixed(2);
-  }
+  // Win Ratio Formulas
+  // if(winner.losses === 0) {
+  //   winner.wlRatio = winner.wins.toFixed(2);
+  // } else {
+  //   winner.wlRatio = (winner.wins / winner.losses).toFixed(2);
+  //   loser.wlRatio = (loser.wins / loser.losses).toFixed(2);
+  // }
 
   // Win Rate Formulas
   // winner.wlRatio = (winner.wins / (winner.wins + winner.losses)).toFixed(2);
   // loser.wlRatio = (loser.wins / (loser.wins + loser.losses)).toFixed(2);
+
+  winner.wlRatio = (winner.wins / (winner.wins + winner.losses + winner.draws) * 100).toFixed(2);
+  loser.wlRatio = (loser.wins / (loser.wins + loser.losses) * 100).toFixed(2);
 
   // Save updated players to local storage
   localStorage.setItem('players', JSON.stringify(players));
