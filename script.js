@@ -46,6 +46,7 @@ function onAddPlayer(e) {
         <td>0</td>
         <td>0</td>
         <td></td>
+        <td></td>
         <td>
           <button class="delete-btn">Delete</button>
         </td>
@@ -63,6 +64,7 @@ function onAddPlayer(e) {
     elo: eloInput,
     wins: 0,
     losses: 0,
+    draws: 0,
     wlRatio: 0.00.toFixed(2)
   };
   
@@ -84,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <td>${player.elo}</td>
           <td>${player.wins}</td>
           <td>${player.losses}</td>
+          <td>${player.draws}</td>
           <td>${player.wlRatio}</td>
           <td>
             <button class="delete-btn" onclick="confDel()">Delete</button>
@@ -147,6 +150,64 @@ function onAddLose(e) {
     localStorage.setItem('players', JSON.stringify(players));
     wlRatioCell.textContent = players[playerIndex].wlRatio;
   }
+}
+
+
+document.getElementById('draw-button').addEventListener('click', onAddDraw);
+function onAddDraw() {
+  const winnerSelect = document.getElementById('winner-select');
+  const loserSelect = document.getElementById('loser-select');
+
+  const winnerName = winnerSelect.value;
+  const loserName = loserSelect.value;
+
+  if (winnerName === '' || loserName === '' || winnerName === loserName) {
+    alert('Please select 2 valid players that drew their match.');
+    return;
+  }
+
+  const players = JSON.parse(localStorage.getItem('players')) || [];
+  const winner = players.find(player => player.name === winnerName);
+  const loser = players.find(player => player.name === loserName);
+
+  if (!winner || !loser) {
+    alert('Error: Player not found.');
+    return;
+  }
+
+  // Update ELO ratings
+  calculateEloRating(winner, loser, 0.5); // Draw result = 0.5
+  calculateEloRating(loser, winner, 0.5); // Draw result = 0.5
+
+  // Update player's draws
+  winner.draws++;
+  loser.draws++;
+
+  // Update win/loss/draw ratio
+  if (winner.losses === 0) {
+    winner.wlRatio = winner.wins.toFixed(2);
+  } else {
+    winner.wlRatio = (winner.wins / winner.losses).toFixed(2);
+  }
+
+  if (loser.losses === 0) {
+    loser.wlRatio = loser.wins.toFixed(2);
+  } else {
+    loser.wlRatio = (loser.wins / loser.losses).toFixed(2);
+  }
+
+  winner.wldRatio = (winner.wins + 0.5 * winner.draws) / (winner.wins + winner.losses + winner.draws);
+  loser.wldRatio = (loser.wins + 0.5 * loser.draws) / (loser.wins + loser.losses + loser.draws);
+
+  // Save updated players to local storage
+  localStorage.setItem('players', JSON.stringify(players));
+
+  // Clear winner and loser selects
+  winnerSelect.value = '';
+  loserSelect.value = '';
+
+  // Reload the page to reflect the changes in the leaderboard table
+  location.reload();
 }
 
 function calculateWLRatio(wins, losses) {
@@ -352,10 +413,10 @@ document.getElementById('seed-data-btn').addEventListener('click', onSeedDataBut
 function seedLocalStorageData() {
   // Create an array of player objects with initial win/loss data
   const players = [
-    { name: 'Nikil Deo', elo: 1200, wins: 1, losses: 0, wlRatio: 0 },
-    { name: 'Adrian Chan', elo: 1000, wins: 4, losses: 3, wlRatio: 0 },
-    { name: 'Aaron Calbert', elo: 800, wins: 1, losses: 2, wlRatio: 0 },
-    { name: 'Chali Tillikaratne', elo: 1100, wins: 2, losses: 1, wlRatio: 0 }
+    { name: 'Nikil Deo', elo: 1200, wins: 1, losses: 0, draws: 0, wlRatio: 1.00 },
+    { name: 'Adrian Chan', elo: 1000, wins: 4, losses: 3, draws: 0, wlRatio: 1.33 },
+    { name: 'Aaron Calbert', elo: 800, wins: 1, losses: 2, draws: 0, wlRatio: 0.5 },
+    { name: 'Chali Tillikaratne', elo: 1100, wins: 2, losses: 1, draws: 0, wlRatio: 2.00 }
   ];
 
   // Store the player data in localStorage

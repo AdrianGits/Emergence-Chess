@@ -11,10 +11,10 @@
 
 <!-- <img class="web-logo" src="weblogo.png"> -->
 <div class="header">
-    <img src="face-right.png" style="height: calc(1rem + 2vw); padding-right: 0.6vw;">
-    <img class="web-logo" src="weblogo.png">
+    <img src="face-right-white.png" style="height: calc(1rem + 2vw); padding-right: 0.6vw;">
+    <img class="web-logo" src="weblogolightgreen.png">
     <h1 class="neon">Chess Leaderboard</h1>
-    <img src="face-left.png" style="height: calc(1rem + 2vw); padding-left: 0.6vw;">
+    <img src="face-left-white.png" style="height: calc(1rem + 2vw); padding-left: 0.6vw;">
 </div>
 
 <body>
@@ -30,6 +30,7 @@
                     <th id="rating-header">Rating <i class="arrow down" id="rating-arrow"></i></th>
                     <th>Wins</th>
                     <th>Losses</th>
+                    <th>Draws</th>
                     <th>W/L Ratio</th>
                     <th>Actions</th>
                 </tr>
@@ -68,6 +69,7 @@
                     <option value="">---</option>
                 </select>
                 <input type="submit" value="Submit" id="submit-results">
+                <button id="draw-button" type="button" class="submit-draw">Draw</button>
             </form>
         </div>
     </div>

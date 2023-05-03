@@ -13,7 +13,7 @@ h1,
 
 body {
   margin: 0 auto;
-  background-image: url('bg-image.jpeg');
+  background-image: url('bg-magenta.jpg');
   background-size: cover;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
@@ -303,4 +303,22 @@ span {
 
 ::-webkit-scrollbar {
   width: 0;
+}
+
+.submit-draw {
+  padding: 0.5vh 0.5vh;
+  background-color: #21B573;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: calc(1rem + 0.1vw);
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
+  border-radius: 10px;
+}
+
+.submit-draw:hover {
+  background-color: #197e50;
 }
