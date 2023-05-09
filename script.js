@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <td>${player.draws}</td>
           <td>${player.wlRatio}%</td>
           <td>
-            <button class="delete-btn" onclick="confDel()">Delete</button>
+            <button class="delete-btn">Delete</button>
           </td>
         </tr>
       `;
@@ -222,15 +222,21 @@ function onDeleteRow(e) {
   if (!e.target.classList.contains("delete-btn")) {
     return;
   }
+
   const delBtn = e.target;
   const row = delBtn.closest('tr');
   const playerName = row.querySelector('td:nth-child(1)').textContent;
-  row.remove();
+  
+  const shouldDelete = confDel(playerName);
 
-  // Remove player from localStorage
-  const players = JSON.parse(localStorage.getItem('players'));
-  const updatedPlayers = players.filter(player => player.name !== playerName);
-  localStorage.setItem('players', JSON.stringify(updatedPlayers));
+  if (shouldDelete) {
+    row.remove();
+
+    // Remove player from localStorage
+    const players = JSON.parse(localStorage.getItem('players'));
+    const updatedPlayers = players.filter(player => player.name !== playerName);
+    localStorage.setItem('players', JSON.stringify(updatedPlayers));
+  }
 }
 
 newPlayerFormEl.addEventListener('submit', onAddPlayer);
@@ -416,10 +422,10 @@ document.getElementById('seed-data-btn').addEventListener('click', onSeedDataBut
 function seedLocalStorageData() {
   // Create an array of player objects with initial win/loss data
   const players = [
-    { name: 'Nikil Deo', elo: 1200, wins: 1, losses: 0, draws: 0, wlRatio: 1.00 },
-    { name: 'Adrian Chan', elo: 1000, wins: 4, losses: 3, draws: 0, wlRatio: 1.33 },
-    { name: 'Aaron Calbert', elo: 800, wins: 1, losses: 2, draws: 0, wlRatio: 0.5 },
-    { name: 'Chali Tillikaratne', elo: 1100, wins: 2, losses: 1, draws: 0, wlRatio: 2.00 }
+    { name: 'Nikil Deo', elo: 1200, wins: 1, losses: 0, draws: 0, wlRatio: 100 },
+    { name: 'Adrian Chan', elo: 1000, wins: 4, losses: 1, draws: 0, wlRatio: 80 },
+    { name: 'Aaron Calbert', elo: 800, wins: 1, losses: 2, draws: 0, wlRatio: 50 },
+    { name: 'Chali Tillikaratne', elo: 1100, wins: 2, losses: 1, draws: 0, wlRatio: 66.66 }
   ];
 
   // Store the player data in localStorage
@@ -448,6 +454,6 @@ players.forEach(player => {
   loserSelect.appendChild(loserOption);
 });
 
-function confDel() {
-  return confirm("Are you sure you want to delete this player?");
+function confDel(playerName) {
+  return confirm(`Are you sure you want to delete ${playerName}?`);
 }
