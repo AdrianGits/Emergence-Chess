@@ -13,7 +13,7 @@ h1,
 
 body {
   margin: 0 auto;
-  background-image: url('bg-magenta.jpg');
+  background-image: url('bg-cyber.jpg');
   background-size: cover;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
@@ -33,8 +33,26 @@ body {
     background-position: -100px 0px;
     background-size: 2750px;
   }
-
 }
+
+/* dialog {
+  z-index: 10;
+  margin-top: 10px;
+  border: none;
+  border-radius: 1rem;
+} */
+
+dialog {
+padding: 0.5rem;
+background: white;
+border-radius: 0.25rem;
+z-index: 10;
+}
+
+dialog::backdrop {
+  background-color: hsl(0, 0%, 0%, 0.6);
+}
+
 
 .header {
   display: flex;
@@ -77,7 +95,8 @@ table {
   border-collapse: separate;
   border-spacing: 0 5px;
   font-size: calc(14px + 0.1vw);
-  letter-spacing: 1px;
+  letter-spacing: 0.35px;
+  font-weight: bold;
 }
 
 th,
