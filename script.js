@@ -36,7 +36,6 @@ function sortTable() {
 function onAddPlayer(e) {
   e.preventDefault();
   const nameInput = document.getElementById('name').value;
-  // const eloInput = document.getElementById('elo').value;
   const eloInput = parseFloat(document.getElementById('elo').value); // Convert elo value to number
   const tbodyEl = document.querySelector('#leaderboard-table tbody');
   const newRow = `
@@ -75,6 +74,8 @@ function onAddPlayer(e) {
   document.getElementById('name').value = '';
   location.reload();
 }
+
+
 // Load players from local storage and display them in the table
 document.addEventListener('DOMContentLoaded', function () {
   const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : [];
@@ -239,7 +240,7 @@ function onDeleteRow(e) {
   }
 }
 
-newPlayerFormEl.addEventListener('submit', onAddPlayer);
+// newPlayerFormEl.addEventListener('submit', onAddPlayer);
 tableEl.addEventListener('click', onAddWin);
 tableEl.addEventListener('click', onAddLose);
 tableEl.addEventListener('click', onDeleteRow);
@@ -457,3 +458,65 @@ players.forEach(player => {
 function confDel(playerName) {
   return confirm(`Are you sure you want to delete ${playerName}?`);
 }
+
+//Modal Code
+const openButton = document.querySelector("[data-open-modal]")
+const modal = document.querySelector("[data-modal]")
+
+openButton.addEventListener("click", () => {
+    modal.showModal()
+})
+
+modal.addEventListener("click", e => {
+  const dialogDimensions = modal.getBoundingClientRect()
+  if (
+    e.clientX < dialogDimensions.left ||
+    e.clientX > dialogDimensions.right ||
+    e.clientY < dialogDimensions.top ||
+    e.clientY > dialogDimensions.bottom
+  ) {
+    modal.close()
+  }
+})
+
+newPlayerFormEl.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const nameInput = document.getElementById('name').value;
+  const eloInput = parseFloat(document.getElementById('elo').value); // Convert elo value to number
+  const tbodyEl = document.querySelector('#leaderboard-table tbody');
+  const newRow = `
+      <tr>
+        <td>${nameInput}</td>
+        <td>${eloInput}</td>
+        <td>0</td>
+        <td>0</td>
+        <td></td>
+        <td></td>
+        <td>
+          <button class="delete-btn">Delete</button>
+        </td>
+      </tr>
+    `;
+  tbodyEl.insertAdjacentHTML('beforeend', newRow);
+
+
+  const deleteBtn = tbodyEl.querySelector('tr:last-child .delete-btn');
+  deleteBtn.addEventListener('click', onDeleteRow);
+
+  // Save player to local storage
+  const player = {
+    name: nameInput,
+    elo: eloInput,
+    wins: 0,
+    losses: 0,
+    draws: 0,
+    wlRatio: 0.00.toFixed(2)
+  };
+  
+  const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : [];
+  players.push(player);
+  localStorage.setItem('players', JSON.stringify(players));
+  // Clear input fields
+  document.getElementById('name').value = '';
+  location.reload();
+});
