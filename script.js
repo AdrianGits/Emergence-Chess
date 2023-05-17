@@ -7,8 +7,31 @@ const tbodyEl = document.querySelector('tbody');
 const tableEl = document.querySelector('table');
 const ratingHeader = document.getElementById("rating-header");
 const ratingArrow = document.getElementById("rating-arrow");
+const matchHistoryTable = document.getElementById("#match-history-table");
 
 ratingHeader.addEventListener("click", sortTable);
+
+// Load players from local storage and display them in the table
+document.addEventListener('DOMContentLoaded', function () {
+  const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : [];
+  const tbodyEl = document.querySelector('#leaderboard-table tbody');
+  for (const player of players) {
+    const newRow = `
+        <tr>
+          <td>${player.name}</td>
+          <td>${player.elo}</td>
+          <td>${player.wins}</td>
+          <td>${player.losses}</td>
+          <td>${player.draws}</td>
+          <td>${player.wlRatio}%</td>
+          <td>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+      `;
+    tbodyEl.insertAdjacentHTML('beforeend', newRow);
+  }
+});
 
 function sortTable() {
   const table = document.getElementById("leaderboard-table");
@@ -33,31 +56,13 @@ function sortTable() {
   rows.forEach(row => table.appendChild(row));
 }
 
-function onAddPlayer(e) {
+// Add new player functionality
+newPlayerFormEl.addEventListener('submit', (e) => {
   e.preventDefault();
   const nameInput = document.getElementById('name').value;
   const eloInput = parseFloat(document.getElementById('elo').value); // Convert elo value to number
   const tbodyEl = document.querySelector('#leaderboard-table tbody');
-  const newRow = `
-      <tr>
-        <td>${nameInput}</td>
-        <td>${eloInput}</td>
-        <td>0</td>
-        <td>0</td>
-        <td></td>
-        <td></td>
-        <td>
-          <button class="delete-btn">Delete</button>
-        </td>
-      </tr>
-    `;
-  tbodyEl.insertAdjacentHTML('beforeend', newRow);
-
-
-  const deleteBtn = tbodyEl.querySelector('tr:last-child .delete-btn');
-  deleteBtn.addEventListener('click', onDeleteRow);
-
-  // Save player to local storage
+  const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : [];
   const player = {
     name: nameInput,
     elo: eloInput,
@@ -66,38 +71,35 @@ function onAddPlayer(e) {
     draws: 0,
     wlRatio: 0.00.toFixed(2)
   };
-  
-  const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : [];
-  players.push(player);
-  localStorage.setItem('players', JSON.stringify(players));
-  // Clear input fields
-  document.getElementById('name').value = '';
-  location.reload();
-}
 
-
-// Load players from local storage and display them in the table
-document.addEventListener('DOMContentLoaded', function () {
-  const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : [];
-  const tbodyEl = document.querySelector('#leaderboard-table tbody');
-  for (const player of players) {
+  // Duplicate check for new users
+  if (players.some(player => player.name.localeCompare(nameInput, undefined, { sensitivity: 'base' }) === 0)) {
+    alert(`${nameInput}` + " already exists in the table. Please enter a new player.");
+  } else {
+    // Save player to local storage
     const newRow = `
-        <tr>
-          <td>${player.name}</td>
-          <td>${player.elo}</td>
-          <td>${player.wins}</td>
-          <td>${player.losses}</td>
-          <td>${player.draws}</td>
-          <td>${player.wlRatio}%</td>
-          <td>
-            <button class="delete-btn">Delete</button>
-          </td>
-        </tr>
-      `;
-    tbodyEl.insertAdjacentHTML('beforeend', newRow);
+    <tr>
+      <td>${nameInput}</td>
+      <td>${eloInput}</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+      <td></td>
+      <td>
+        <button class="delete-btn">Delete</button>
+      </td>
+    </tr>
+  `;
+tbodyEl.insertAdjacentHTML('beforeend', newRow);
+const deleteBtn = tbodyEl.querySelector('tr:last-child .delete-btn');
+deleteBtn.addEventListener('click', onDeleteRow);
+players.push(player);
+localStorage.setItem('players', JSON.stringify(players));
+// Clear input fields
+document.getElementById('name').value = '';
+location.reload();
   }
 });
-
 
 function onAddWin(e) {
   if (!e.target.classList.contains("win-btn")) {
@@ -240,7 +242,6 @@ function onDeleteRow(e) {
   }
 }
 
-// newPlayerFormEl.addEventListener('submit', onAddPlayer);
 tableEl.addEventListener('click', onAddWin);
 tableEl.addEventListener('click', onAddLose);
 tableEl.addEventListener('click', onDeleteRow);
@@ -260,12 +261,17 @@ function calculateEloRating(player1, player2, result) {
   player2.elo = Math.round(player2.elo);
 }
 
+// Add event listener to form submit
+const form = document.getElementById('result-form');
+form.addEventListener('submit', onSubmitForm);
+
 // Function to handle form submission
 function onSubmitForm(e) {
   e.preventDefault();
   const winnerSelect = document.getElementById('winner-select');
   const loserSelect = document.getElementById('loser-select');
 
+  // Grab value of winner and loser
   const winnerName = winnerSelect.value;
   const loserName = loserSelect.value;
 
@@ -304,7 +310,26 @@ function onSubmitForm(e) {
   // loser.wlRatio = (loser.wins / (loser.wins + loser.losses)).toFixed(2);
 
   winner.wlRatio = (winner.wins / (winner.wins + winner.losses + winner.draws) * 100).toFixed(2);
-  loser.wlRatio = (loser.wins / (loser.wins + loser.losses) * 100).toFixed(2);
+  loser.wlRatio = (loser.wins / (loser.wins + loser.losses + loser.draws) * 100).toFixed(2);
+
+
+
+
+
+
+  // Store winner and loser in an array in localStorage
+  const matches = JSON.parse(localStorage.getItem('matches')) || [];
+  const match = {
+    winner: winnerName,
+    loser: loserName,
+    timestamp: new Date().toISOString()
+  };
+  matches.push(match);
+  localStorage.setItem('matches', JSON.stringify(matches));
+
+
+
+
 
   // Save updated players to local storage
   localStorage.setItem('players', JSON.stringify(players));
@@ -317,9 +342,6 @@ function onSubmitForm(e) {
   location.reload();
 }
 
-// Add event listener to form submit
-const form = document.getElementById('result-form');
-form.addEventListener('submit', onSubmitForm);
 
 
 // Hidden button sequence for developer buttons
@@ -425,7 +447,7 @@ function seedLocalStorageData() {
   const players = [
     { name: 'Nikil Deo', elo: 1200, wins: 1, losses: 0, draws: 0, wlRatio: 100 },
     { name: 'Adrian Chan', elo: 1000, wins: 4, losses: 1, draws: 0, wlRatio: 80 },
-    { name: 'Aaron Calbert', elo: 800, wins: 1, losses: 2, draws: 0, wlRatio: 50 },
+    { name: 'Aaron Calbert', elo: 800, wins: 1, losses: 2, draws: 0, wlRatio: 33.33 },
     { name: 'Chali Tillikaratne', elo: 1100, wins: 2, losses: 1, draws: 0, wlRatio: 66.66 }
   ];
 
@@ -440,6 +462,7 @@ function onSeedDataButtonClick() {
   location.reload();
 }
 
+// Populate winner and loser dropdown boxes
 const players = JSON.parse(localStorage.getItem('players')) || [];
 players.sort((a, b) => a.name.localeCompare(b.name));
 const winnerSelect = document.getElementById('winner-select');
@@ -455,68 +478,57 @@ players.forEach(player => {
   loserSelect.appendChild(loserOption);
 });
 
+// Confirmation message to delete player from table
 function confDel(playerName) {
   return confirm(`Are you sure you want to delete ${playerName}?`);
 }
 
 //Modal Code
-const openButton = document.querySelector("[data-open-modal]")
-const modal = document.querySelector("[data-modal]")
+const matchHistoryButton = document.getElementById('matchHistoryButton');
+const modal = document.getElementById('modal');
+const matchHistoryTableBody = document.querySelector('#matchHistoryTable tbody');
 
-openButton.addEventListener("click", () => {
-    modal.showModal()
-})
+matchHistoryButton.addEventListener('click', () => {
+  const matches = JSON.parse(localStorage.getItem('matches')) || [];
+  populateMatchHistoryTable(matches);
+  modal.showModal();
+});
 
-modal.addEventListener("click", e => {
-  const dialogDimensions = modal.getBoundingClientRect()
+modal.addEventListener('click', (e) => {
+  const dialogDimensions = modal.getBoundingClientRect();
   if (
     e.clientX < dialogDimensions.left ||
     e.clientX > dialogDimensions.right ||
     e.clientY < dialogDimensions.top ||
     e.clientY > dialogDimensions.bottom
   ) {
-    modal.close()
+    modal.close();
   }
-})
-
-newPlayerFormEl.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const nameInput = document.getElementById('name').value;
-  const eloInput = parseFloat(document.getElementById('elo').value); // Convert elo value to number
-  const tbodyEl = document.querySelector('#leaderboard-table tbody');
-  const newRow = `
-      <tr>
-        <td>${nameInput}</td>
-        <td>${eloInput}</td>
-        <td>0</td>
-        <td>0</td>
-        <td></td>
-        <td></td>
-        <td>
-          <button class="delete-btn">Delete</button>
-        </td>
-      </tr>
-    `;
-  tbodyEl.insertAdjacentHTML('beforeend', newRow);
-
-
-  const deleteBtn = tbodyEl.querySelector('tr:last-child .delete-btn');
-  deleteBtn.addEventListener('click', onDeleteRow);
-
-  // Save player to local storage
-  const player = {
-    name: nameInput,
-    elo: eloInput,
-    wins: 0,
-    losses: 0,
-    draws: 0,
-    wlRatio: 0.00.toFixed(2)
-  };
-  
-  const players = localStorage.getItem('players') ? JSON.parse(localStorage.getItem('players')) : [];
-  players.push(player);
-  localStorage.setItem('players', JSON.stringify(players));
-  // Clear input fields
-  document.getElementById('name').value = '';
-  location.reload();
 });
+
+// Function to populate the match history table
+function populateMatchHistoryTable(matches) {
+  matchHistoryTableBody.innerHTML = '';
+
+  matches.forEach((match) => {
+    const row = document.createElement('tr');
+    // const winnerCell = document.createElement('td');
+    // const loserCell = document.createElement('td');
+    // const timestampCell = document.createElement('td');
+    const mhCell = document.createElement('td');
+
+    // winnerCell.textContent = match.winner;
+    // loserCell.textContent = match.loser;
+    // timestampCell.textContent = match.timestamp;
+
+    mhCell.textContent = match.winner + " has won against " + match.loser + "!";
+
+    row.appendChild(mhCell);
+
+    // row.appendChild(winnerCell);
+    // row.appendChild(loserCell);
+    // row.appendChild(timestampCell);
+
+    matchHistoryTableBody.insertBefore(row, matchHistoryTableBody.firstChild);
+  });
+}
