@@ -1,5 +1,5 @@
 ﻿<a name="readme-top"></a>
-# Emergence-Chess
+# Emergence Chess Leaderboard Application
 An application developed for Emergence Office TVs to track chess match results (wins and losses), and an ELO rating system to track points for leaderboard ordering. Developed as a simple web application to run on low-spec machines, using only a browser's localStorage to save player data, with the ability to save and load data from a text file.
 
 <div align="center">
