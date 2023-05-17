@@ -312,11 +312,6 @@ function onSubmitForm(e) {
   winner.wlRatio = (winner.wins / (winner.wins + winner.losses + winner.draws) * 100).toFixed(2);
   loser.wlRatio = (loser.wins / (loser.wins + loser.losses + loser.draws) * 100).toFixed(2);
 
-
-
-
-
-
   // Store winner and loser in an array in localStorage
   const matches = JSON.parse(localStorage.getItem('matches')) || [];
   const match = {
@@ -487,13 +482,13 @@ function confDel(playerName) {
 const matchHistoryButton = document.getElementById('matchHistoryButton');
 const modal = document.getElementById('modal');
 const matchHistoryTableBody = document.querySelector('#matchHistoryTable tbody');
+const closeBtn = document.getElementById('close-btn');
 
 matchHistoryButton.addEventListener('click', () => {
   const matches = JSON.parse(localStorage.getItem('matches')) || [];
   populateMatchHistoryTable(matches);
   modal.showModal();
 });
-
 modal.addEventListener('click', (e) => {
   const dialogDimensions = modal.getBoundingClientRect();
   if (
@@ -505,6 +500,10 @@ modal.addEventListener('click', (e) => {
     modal.close();
   }
 });
+closeBtn.addEventListener('click', function() {
+  modal.close();
+});
+
 
 // Function to populate the match history table
 function populateMatchHistoryTable(matches) {
