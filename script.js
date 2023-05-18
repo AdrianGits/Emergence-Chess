@@ -509,22 +509,11 @@ function populateMatchHistoryTable(matches) {
 
   matches.forEach((match) => {
     const row = document.createElement('tr');
-    // const winnerCell = document.createElement('td');
-    // const loserCell = document.createElement('td');
-    // const timestampCell = document.createElement('td');
     const mhCell = document.createElement('td');
-
-    // winnerCell.textContent = match.winner;
-    // loserCell.textContent = match.loser;
-    // timestampCell.textContent = match.timestamp;
 
     mhCell.textContent = match.timestamp + " - " + match.winner + " has won against " + match.loser + "!";
 
     row.appendChild(mhCell);
-
-    // row.appendChild(winnerCell);
-    // row.appendChild(loserCell);
-    // row.appendChild(timestampCell);
 
     matchHistoryTableBody.insertBefore(row, matchHistoryTableBody.firstChild);
   });
