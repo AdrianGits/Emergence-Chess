@@ -274,16 +274,13 @@ function onSubmitForm(e) {
   // Grab value of winner and loser
   const winnerName = winnerSelect.value;
   const loserName = loserSelect.value;
-
   if (winnerName === '' || loserName === '' || winnerName === loserName) {
     alert('Please select a valid winner and loser.');
     return;
   }
-
   const players = JSON.parse(localStorage.getItem('players')) || [];
   const winner = players.find(player => player.name === winnerName);
   const loser = players.find(player => player.name === loserName);
-
   if (!winner || !loser) {
     alert('Error: Player not found.');
     return;
@@ -297,34 +294,37 @@ function onSubmitForm(e) {
   winner.wins++;
   loser.losses++;
 
-  // Win Ratio Formulas
-  // if(winner.losses === 0) {
-  //   winner.wlRatio = winner.wins.toFixed(2);
-  // } else {
-  //   winner.wlRatio = (winner.wins / winner.losses).toFixed(2);
-  //   loser.wlRatio = (loser.wins / loser.losses).toFixed(2);
-  // }
-
   // Win Rate Formulas
-  // winner.wlRatio = (winner.wins / (winner.wins + winner.losses)).toFixed(2);
-  // loser.wlRatio = (loser.wins / (loser.wins + loser.losses)).toFixed(2);
-
   winner.wlRatio = (winner.wins / (winner.wins + winner.losses + winner.draws) * 100).toFixed(2);
   loser.wlRatio = (loser.wins / (loser.wins + loser.losses + loser.draws) * 100).toFixed(2);
 
   // Store winner and loser in an array in localStorage
   const matches = JSON.parse(localStorage.getItem('matches')) || [];
+  const currentDate = new Date();
+  const day = currentDate.getDate();
+  const month = currentDate.getMonth() + 1; // Months are zero-based, so we add 1
+  const year = currentDate.getFullYear();
+  const hours = currentDate.getHours();
+  const minutes = currentDate.getMinutes();
+  let ampm = 'am';
+  // Convert to 12-hour format and determine AM/PM
+  if (hours >= 12) {
+    ampm = 'pm';
+    if (hours > 12) {
+      hours -= 12;
+    }
+  }
+  if (hours === 0) {
+    hours = 12;
+  }
+  const formattedTimestamp = ('0' + day).slice(-2) + '/' + ('0' + month).slice(-2) + '/' + year + ' ' + ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ampm;
   const match = {
     winner: winnerName,
     loser: loserName,
-    timestamp: new Date().toISOString()
+    timestamp: formattedTimestamp
   };
   matches.push(match);
   localStorage.setItem('matches', JSON.stringify(matches));
-
-
-
-
 
   // Save updated players to local storage
   localStorage.setItem('players', JSON.stringify(players));
@@ -387,14 +387,12 @@ function onClearLocalStorage() {
 window.addEventListener('DOMContentLoaded', function () {
   const table = document.getElementById('leaderboard-table');
   const emptyStateMessage = document.createElement('span');
-  emptyStateMessage.className = 'empty-state';
+  // emptyStateMessage.className = 'empty-state';
   emptyStateMessage.textContent = 'No data available. Add a player to get started!';
-
   if (table.rows.length <= 1) {
     document.querySelector('.leaderboard-div').appendChild(emptyStateMessage);
   }
 });
-
 
 
 // Function to save players data to a text file
@@ -520,7 +518,7 @@ function populateMatchHistoryTable(matches) {
     // loserCell.textContent = match.loser;
     // timestampCell.textContent = match.timestamp;
 
-    mhCell.textContent = match.winner + " has won against " + match.loser + "!";
+    mhCell.textContent = match.timestamp + " - " + match.winner + " has won against " + match.loser + "!";
 
     row.appendChild(mhCell);
 
