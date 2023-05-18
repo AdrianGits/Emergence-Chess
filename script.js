@@ -304,7 +304,7 @@ function onSubmitForm(e) {
   const day = currentDate.getDate();
   const month = currentDate.getMonth() + 1; // Months are zero-based, so we add 1
   const year = currentDate.getFullYear();
-  const hours = currentDate.getHours();
+  let hours = currentDate.getHours();
   const minutes = currentDate.getMinutes();
   let ampm = 'am';
   // Convert to 12-hour format and determine AM/PM
