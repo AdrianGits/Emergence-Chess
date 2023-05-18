@@ -36,8 +36,8 @@
                     <th>Actions</th>
                 </tr>
         </table>
-        <tr id="empty-state-row" style="display:none;">
-            </tbody>
+        <!-- <tr id="empty-state-row" style="display:none;"> -->
+        </tbody>
     </div>
     <button id="save-btn" style="margin-right: 2vw;">Save Table to .txt</button>
     <input type="file" id="load-file" accept=".txt">
@@ -75,17 +75,19 @@
         </div>
     </div>
 
-    <button id="matchHistoryButton" data-open-modal>Match History</button>
-<dialog id="modal" data-modal>
-    <table id="matchHistoryTable">
-        <thead>
-            <tr>
-                <th>Match History</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</dialog>
+
+    <button id="matchHistoryButton" data-open-modal>View Match History</button>
+    <dialog id="modal" data-modal>
+        <div class="close" id="close-btn"></div>
+        <table id="matchHistoryTable">
+            <thead>
+                <tr>
+                    <th>Match History</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </dialog>
 
 
 
